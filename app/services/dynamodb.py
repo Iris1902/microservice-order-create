@@ -15,10 +15,10 @@ dynamodb = boto3.resource(
 table = dynamodb.Table(os.getenv("DYNAMODB_TABLE"))
 
 def create_cart(user_id):
-    cart_id = random.randint(1_000_000, 9_999_999)  # id generado automáticamente como int
+    cart_id = random.randint(1_000_000, 9_999_999) 
     table.put_item(
         Item={
-            "id": cart_id,  # id como int
+            "id": cart_id, 
             "user_id": user_id,
             "product_ids": []
         }
