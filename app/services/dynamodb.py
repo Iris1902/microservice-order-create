@@ -1,5 +1,6 @@
 import boto3
 import os
+import random
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -13,11 +14,13 @@ dynamodb = boto3.resource(
 
 table = dynamodb.Table(os.getenv("DYNAMODB_TABLE"))
 
-def create_cart(cart_id, user_id):
+def create_cart(user_id):
+    cart_id = random.randint(1_000_000, 9_999_999)  # id generado automáticamente como int
     table.put_item(
         Item={
-            "id": cart_id,  # Cambiado de 'cart_id' a 'id' para coincidir con la clave primaria de la tabla
+            "id": cart_id,  # id como int
             "user_id": user_id,
             "product_ids": []
         }
     )
+    return cart_id
