@@ -3,7 +3,7 @@ from app.services.dynamodb import create_cart
 
 @strawberry.type
 class Cart:
-    id: str  # Cambiado a 'id' para coincidir con DynamoDB
+    id: str
     user_id: str
     product_ids: list[str]
 
@@ -18,6 +18,6 @@ class Mutation:
     @strawberry.mutation
     def create_cart(self, user_id: str) -> Cart:
         cart_id = create_cart(user_id)
-        return Cart(id=cart_id, user_id=user_id, product_ids=[])
+        return Cart(id=str(cart_id), user_id=user_id, product_ids=[])
 
 schema = strawberry.Schema(query=Query, mutation=Mutation)
