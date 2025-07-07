@@ -8,4 +8,9 @@ load_dotenv()
 app = FastAPI()
 graphql_app = GraphQLRouter(schema)
 
-app.include_router(graphql_app, prefix="/graphql")
+app.include_router(graphql_app, prefix="/order-create/graphql")
+
+
+@app.get("/order-create/health")
+def health():
+    return {"status": "ok"}
